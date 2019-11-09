@@ -26,28 +26,28 @@ import io.reactivex.SingleOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = "MainActivity";
     private Disposable disposable;
-    private Button btFlowable,btSingle,btMaybe,btCompletable,btObservable;
-
+    private Button btFlowable, btSingle, btMaybe, btCompletable, btObservable;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btCompletable= findViewById(R.id.bt_completable);
-        btFlowable= findViewById(R.id.bt_flowable);
-        btMaybe= findViewById(R.id.bt_maybe);
-        btSingle= findViewById(R.id.bt_clic_single);
+        btCompletable = findViewById(R.id.bt_completable);
+        btFlowable = findViewById(R.id.bt_flowable);
+        btMaybe = findViewById(R.id.bt_maybe);
+        btSingle = findViewById(R.id.bt_clic_single);
         btFlowable.setOnClickListener(this);
         btSingle.setOnClickListener(this);
         btMaybe.setOnClickListener(this);
         btCompletable.setOnClickListener(this);
-
+        demoObservableFrom();
 
 //        btnRun.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //
 //
 //        });
-       // getSingleObservable().subscribe(getSingleObserver());
+        // getSingleObservable().subscribe(getSingleObserver());
 //        Note note = new Note(1, "Home work!");
 //
 //        Completable completableObservable = updateNote(note);
@@ -72,7 +72,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void demoObservableFrom() {
 
-        Observable observable = Observable.just("A", "B", "C", "D", "E", "F");
+        Observable observable = Observable.fromArray("1","2","3");
+//                .filter(new Predicate<String>() {
+//                    @Override
+//                    public boolean test(String s) throws Exception {
+//                        return s.equals("C");
+//                    }
+//                });
         Observer observer = new Observer() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -94,13 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.e(TAG, "onComplete: ");
             }
         };
-        observable.map(new Function() {
-            @Override
-            public Object apply(Object o) throws Exception {
-                return null;
-            }
-        })
-                .subscribe(observer);
+        observable.subscribe(observer);
 
     }
 
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void subscribe(CompletableEmitter emitter) throws Exception {
                 if (!emitter.isDisposed()) {
-                   // Thread.sleep(1000);
+                    // Thread.sleep(1000);
                     emitter.onComplete();
                 }
             }
@@ -184,21 +184,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.bt_clic_single:
-                Intent intent = new Intent(this,SingleObserverActivity.class);
+                Intent intent = new Intent(this, SingleObserverActivity.class);
                 startActivity(intent);
                 break;
             case R.id.bt_completable:
-                Intent intent1 = new Intent(this,CompletableObserverActivity.class);
+                Intent intent1 = new Intent(this, CompletableObserverActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.bt_flowable:
-                Intent intent2 = new Intent(this,FlowableObserverActivity.class);
+                Intent intent2 = new Intent(this, FlowableObserverActivity.class);
                 startActivity(intent2);
                 break;
             case R.id.bt_maybe:
-                Intent intent3 = new Intent(this,MaybeObserverActivity.class);
+                Intent intent3 = new Intent(this, MaybeObserverActivity.class);
                 startActivity(intent3);
                 break;
 

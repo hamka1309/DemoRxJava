@@ -9,8 +9,10 @@ import io.reactivex.Maybe;
 import io.reactivex.MaybeEmitter;
 import io.reactivex.MaybeObserver;
 import io.reactivex.MaybeOnSubscribe;
+import io.reactivex.MaybeSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class MaybeObserverActivity extends AppCompatActivity {
@@ -23,25 +25,34 @@ public class MaybeObserverActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
 
-        Maybe<Note> noteObservable = getNoteObservable();
+        Maybe<String[]> noteObservable = getNoteObservable();
 
-        MaybeObserver<Note> noteObserver = getNoteObserver();
+        Maybe<Integer> integerMaybe = noteObservable.flatMap(new Function<String[], MaybeSource<Integer>>() {
+            @Override
+            public MaybeSource<Integer> apply(String[] strings) throws Exception {
+                return getMaybeInt(strings);
+            }
+        });
+        MaybeObserver<String[]> noteObserver = getNoteObserver();
 
         noteObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(noteObserver);
     }
 
-    private MaybeObserver<Note> getNoteObserver() {
-        return new MaybeObserver<Note>() {
+    private Maybe<Integer> getMaybeInt(String[] str) {
+        return Maybe.empty();
+    }
+    private MaybeObserver<String[]> getNoteObserver() {
+        return new MaybeObserver<String[]>() {
             @Override
             public void onSubscribe(Disposable d) {
                 disposable = d;
             }
 
             @Override
-            public void onSuccess(Note note) {
-                Log.e(TAG, "onSuccess: " + note.getNote());
+            public void onSuccess(String[] strings) {
+                Log.e(TAG, "onSuccess: " + strings);
             }
 
             @Override
@@ -56,17 +67,17 @@ public class MaybeObserverActivity extends AppCompatActivity {
         };
     }
 
-    private Maybe<Note> getNoteObservable() {
-        return Maybe.create(new MaybeOnSubscribe<Note>() {
-            @Override
-            public void subscribe(MaybeEmitter<Note> emitter) throws Exception {
-                Note note = new Note(1, "Call!");
-                if (!emitter.isDisposed()) {
-                    emitter.onSuccess(note);
-                }
-            }
-        });
-      //  return Maybe.just(new Note(1,"Hello"));
+    private Maybe<String[]> getNoteObservable() {
+//        return Maybe.create(new MaybeOnSubscribe<Note>() {
+//            @Override
+//            public void subscribe(MaybeEmitter<Note> emitter) throws Exception {
+//                Note note = new Note(1, "Call!");
+//                if (!emitter.isDisposed()) {
+//                    emitter.onSuccess(note);
+//                }
+//            }
+//        });
+        return Maybe.just(new String[]{"1","2","3","4"});
     }
 
     @Override
