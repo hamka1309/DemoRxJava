@@ -42,13 +42,13 @@ public class FlowableObserverActivity extends AppCompatActivity {
         return new SingleObserver<Integer>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.d(TAG, "onSubscribe");
+                Log.e(TAG, "onSubscribe");
                 disposable = d;
             }
 
             @Override
             public void onSuccess(Integer integer) {
-                Log.d(TAG, "onSuccess: " + integer);
+                Log.e(TAG, "onSuccess: " + integer);
             }
 
             @Override

@@ -6,21 +6,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-<TextView
-    android:id="@+id/tv"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Hello"/>
 
-    <EditText
-        android:id="@+id/et"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello"/>
     <Button
-        android:id="@+id/bt_click"
+        android:id="@+id/bt_clic_single"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello"/>
+        android:text="Single"/>
+    <Button
+        android:id="@+id/bt_maybe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="May be"/>
+    <Button
+        android:id="@+id/bt_observable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Observable"/>
+    <Button
+        android:id="@+id/bt_flowable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Flowable"/>
+    <Button
+        android:id="@+id/bt_completable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Completable"/>
+
 
 </LinearLayout>

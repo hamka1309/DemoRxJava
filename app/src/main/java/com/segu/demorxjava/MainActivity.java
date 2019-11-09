@@ -1,7 +1,9 @@
 package com.segu.demorxjava;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,9 +28,10 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = "MainActivity";
     private Disposable disposable;
+    private Button btFlowable,btSingle,btMaybe,btCompletable,btObservable;
 
 
 
@@ -36,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        btCompletable= findViewById(R.id.bt_completable);
+        btFlowable= findViewById(R.id.bt_flowable);
+        btMaybe= findViewById(R.id.bt_maybe);
+        btObservable= findViewById(R.id.bt_observable);
+        btSingle= findViewById(R.id.bt_clic_single);
+
 
 //        btnRun.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -46,16 +55,16 @@ public class MainActivity extends AppCompatActivity {
 //
 //        });
        // getSingleObservable().subscribe(getSingleObserver());
-        Note note = new Note(1, "Home work!");
-
-        Completable completableObservable = updateNote(note);
-
-        CompletableObserver completableObserver = completableObserver();
-
-        completableObservable
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(completableObserver);
+//        Note note = new Note(1, "Home work!");
+//
+//        Completable completableObservable = updateNote(note);
+//
+//        CompletableObserver completableObserver = completableObserver();
+//
+//        completableObservable
+////                .subscribeOn(Schedulers.io())
+////                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(completableObserver);
     }
 
     private void demoObservableFrom() {
@@ -169,10 +178,28 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        disposable.dispose();
-    }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.bt_clic_single:
+                Intent intent = new Intent(this,SingleObserverActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.bt_completable:
+                Intent intent1 = new Intent(this,CompletableObserverActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.bt_flowable:
+                Intent intent2 = new Intent(this,FlowableObserverActivity.class);
+                startActivity(intent2);
+                break;
+            case R.id.bt_maybe:
+                Intent intent3 = new Intent(this,MaybeObserverActivity.class);
+                startActivity(intent3);
+                break;
+
+
+        }
+    }
 }

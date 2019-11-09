@@ -44,12 +44,12 @@ public class SingleObserverActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(Note note) {
-                Log.d(TAG, "onSuccess: " + note.getNote());
+                Log.e(TAG, "onSuccess: " + note.getNote());
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.d(TAG, "onError: " + e.getMessage());
+                Log.e(TAG, "onError: " + e.getMessage());
             }
         };
     }

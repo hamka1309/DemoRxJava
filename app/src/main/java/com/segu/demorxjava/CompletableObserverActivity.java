@@ -18,19 +18,10 @@ public class CompletableObserverActivity extends AppCompatActivity {
     private static final String TAG = CompletableObserverActivity.class.getSimpleName();
     private Disposable disposable;
 
-    /**
-     * Completable won't emit any item, instead it returns
-     * Success or failure state
-     * Consider an example of making a PUT request to server to update
-     * something where you are not expecting any response but the
-     * success status
-     * -
-     * Completable : CompletableObserver
-     */
-    // TODO - link to Retrofit  tutorial
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e(TAG, "onCreate: " );
         setContentView(R.layout.activity_main);
 
         Note note = new Note(1, "Home work!");
@@ -61,13 +52,13 @@ public class CompletableObserverActivity extends AppCompatActivity {
         return new CompletableObserver() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.d(TAG, "onSubscribe");
+                Log.e(TAG, "onSubscribe");
                 disposable = d;
             }
 
             @Override
             public void onComplete() {
-                Log.d(TAG, "onComplete: Note updated successfully!");
+                Log.e(TAG, "onComplete: Note updated successfully!");
             }
 
             @Override

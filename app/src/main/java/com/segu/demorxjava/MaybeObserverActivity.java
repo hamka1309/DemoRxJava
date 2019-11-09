@@ -49,7 +49,7 @@ public class MaybeObserverActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(Note note) {
-                Log.d(TAG, "onSuccess: " + note.getNote());
+                Log.e(TAG, "onSuccess: " + note.getNote());
             }
 
             @Override
