@@ -18,18 +18,10 @@ public class MaybeObserverActivity extends AppCompatActivity {
     private static final String TAG = MaybeObserverActivity.class.getSimpleName();
     private Disposable disposable;
 
-    /**
-     * Consider an example getting a note from db using ID
-     * There is possibility of not finding the note by ID in the db
-     * In this situation, MayBe can be used
-     * -
-     * Maybe : MaybeObserver
-     */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_demo);
 
         Maybe<Note> noteObservable = getNoteObservable();
 
@@ -68,12 +60,13 @@ public class MaybeObserverActivity extends AppCompatActivity {
         return Maybe.create(new MaybeOnSubscribe<Note>() {
             @Override
             public void subscribe(MaybeEmitter<Note> emitter) throws Exception {
-                Note note = new Note(1, "Call brother!");
+                Note note = new Note(1, "Call!");
                 if (!emitter.isDisposed()) {
                     emitter.onSuccess(note);
                 }
             }
         });
+      //  return Maybe.just(new Note(1,"Hello"));
     }
 
     @Override

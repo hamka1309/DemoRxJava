@@ -21,8 +21,7 @@ public class CompletableObserverActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e(TAG, "onCreate: " );
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_demo);
 
         Note note = new Note(1, "Home work!");
 

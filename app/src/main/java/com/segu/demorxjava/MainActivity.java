@@ -42,8 +42,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btCompletable= findViewById(R.id.bt_completable);
         btFlowable= findViewById(R.id.bt_flowable);
         btMaybe= findViewById(R.id.bt_maybe);
-        btObservable= findViewById(R.id.bt_observable);
         btSingle= findViewById(R.id.bt_clic_single);
+        btFlowable.setOnClickListener(this);
+        btSingle.setOnClickListener(this);
+        btMaybe.setOnClickListener(this);
+        btCompletable.setOnClickListener(this);
 
 
 //        btnRun.setOnClickListener(new View.OnClickListener() {

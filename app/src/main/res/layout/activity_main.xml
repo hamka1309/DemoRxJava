@@ -17,11 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="May be"/>
-    <Button
-        android:id="@+id/bt_observable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Observable"/>
+
     <Button
         android:id="@+id/bt_flowable"
         android:layout_width="wrap_content"
